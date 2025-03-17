@@ -12,10 +12,10 @@ class Database {
 
         this.db.connect((err) => {
             if (err) {
-                console.error('Database connection failed:', err.stack);
+                console.error('❌ Database connection failed:', err.stack);
                 return;
             }
-            console.log('Connected to MySQL database');
+            console.log('✅ Connected to MySQL database');
             this.createTables();
         });
     }
@@ -100,11 +100,12 @@ class Database {
             if (exists) {
                 console.log(`✅ Table '${table.name}' already exists.`);
             } else {
+                console.log(`⚠️ Table '${table.name}' does NOT exist. Creating now...`);
                 this.db.query(table.query, (err, result) => {
                     if (err) {
                         console.error(`❌ Error creating table '${table.name}':`, err);
                     } else {
-                        console.log(`🆕 Table '${table.name}' was created.`);
+                        console.log(`🆕 Table '${table.name}' was successfully created.`);
                     }
                 });
             }
